@@ -42,25 +42,25 @@ if (isset($_GET['partyId'])) {
                             <table class="table">
                                 <thead>
                                   <tr>
-                                    <th>From Date</th>
-                                    <th>To Date</th>
-                                    <th>Supplier </th>
+                                    <th width="10%">From Date</th>
+                                    <th width="10%">To Date</th>
+                                    <th width="30%">Supplier </th>
                                     <th>Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <tr>
                                     <td>
-                                        <input type="date" value="{{ $fromDate }}" class="form-control w-150" name="fromDate" id="">                 
+                                        <input type="date" value="{{ $fromDate }}" class="form-control" name="fromDate" id="">                 
                                     </td>
                                     
                                     <td>
-                                        <input type="date" value="{{ $toDate }}" class="form-control w-150" name="toDate" id="">                 
+                                        <input type="date" value="{{ $toDate }}" class="form-control" name="toDate" id="">                 
                                     </td>
 
                                     
                                     <td>
-                                        <select name="partyId" class="js-select2 w-200" id="partyId">
+                                        <select name="partyId" class="js-select2" id="partyId">
                                             <option value="">Select All</option>    
                                             @foreach($supplier as $row)
                                             <option @if($partyId==$row->id) selected @endif value="{{ $row->id }}">{{ $row->name }}</option> 

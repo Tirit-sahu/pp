@@ -109,11 +109,11 @@ if (isset($_GET['partyId'])) {
                                             <td>{{ $row->discount }}</td>
                                             <td>{{ $row->narration }}</td>
                                             <td class='hidden-480'>                                                
-                                                <a href="{{ route('PdfCarretReceiveA6') }}?id={{ $row->id }}" target="_blank" class="btn btn-primary" rel="tooltip" title="Print">
+                                                <a href="{{ route('PdfCarretReceiveA6') }}?id={{ $row->id }}&date={{ $row->date }}" target="_blank" class="btn btn-primary" rel="tooltip" title="Print">
                                                     A6
                                                 </a>
                                                 
-                                                <a href="{{ route('PdfCarretReceiveHindiA6') }}?id={{ $row->id }}" target="_blank"  class="btn btn-warning" rel="tooltip" title="Print">
+                                                <a href="{{ route('PdfCarretReceiveHindiA6') }}?id={{ $row->id }}&date={{ $row->date }}" target="_blank"  class="btn btn-warning" rel="tooltip" title="Print">
                                                     A6
                                                 </a>
 

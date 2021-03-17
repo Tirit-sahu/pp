@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 $groupName=0;
 $minAmt='';
-$name = '';
+$name = 0;
 
 
 if (isset($_GET['groupName'])) {
@@ -41,15 +41,21 @@ if(isset($_GET['name'])){
                             <form action="{{ url('/party-balance-report') }}" method="GET">                                
                             <table class="table">
                                 <thead>
-                                  <tr>                                   
+                                  <tr>      
+                                    <th width="10%">Customer Name</th>                             
                                     <th width="20%">Group Name</th>
-                                    <th width="10%">Min. Amt</th>
-                                    <th width="10%">Customer Name</th>
+                                    <th width="10%">Min. Amt</th>                                    
                                     <th>Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <tr>
+
+                                    <td>
+                                        <select name="name" class="js-select2" id="name">
+                                            <option value="">Select All</option>    
+                                        </select>
+                                    </td>
                                    
                                     <td>
                                         <select name="groupName" class="js-select2" id="groupName">
@@ -59,11 +65,7 @@ if(isset($_GET['name'])){
 
                                     <td>
                                         <input type="text" class="form-control" name="minAmt" value="{{ $minAmt }}">
-                                    </td>
-
-                                    <td>
-                                        <input type="text" class="form-control" name="name" value="{{ $name }}">
-                                    </td>
+                                    </td>                                    
                                    
                                     <td>
                                         <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
@@ -149,7 +151,6 @@ if(isset($_GET['name'])){
 
                                 
                             </table>
-                            {{ $parties->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
                 </div>
@@ -165,8 +166,7 @@ if(isset($_GET['name'])){
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    function getCustSuppLoader(){
-           
+    function getGroupName(){           
             $.ajax({
             type:'GET',
             url:'{{ url("common-get-select2") }}?table=master_groups&id=id&column=name',
@@ -177,9 +177,23 @@ if(isset($_GET['name'])){
                 $('#groupName').trigger('change'); 
             }
             });
-
         }
-        getCustSuppLoader();
+        getGroupName();
+
+
+        function getCustSuppLoader(){           
+           $.ajax({
+           type:'GET',
+           url:'{{ url("common-get-select2") }}?table=master_customer_suppliers&id=id&column=name',
+           success:function(response){
+               console.log(response);
+               $("#name").html(response);
+               $("#name").val(@php echo $name; @endphp);
+               $('#name').trigger('change'); 
+           }
+           });
+       }
+       getCustSuppLoader();
         
 </script>
 

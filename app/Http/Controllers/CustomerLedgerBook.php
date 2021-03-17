@@ -163,17 +163,22 @@ class CustomerLedgerBook extends Controller
 
 
     public function partyBalanceReport(Request $request)
-    {
-        
+    {       
+
         $companyId = $this->companyId;
         date_default_timezone_set('Asia/Kolkata');
         $date = date('Y-m-d');
         $status = false;
-        $parties = [];
-
         $master_units = DB::table('master_units')
         ->where('isStockable', 'Yes')
         ->get();
+        $parties = [];
+
+        if (empty($request->all())) {
+            return view('balance-report', ['parties'=>$parties, 'master_units'=>$master_units]);
+        }
+
+        
 
         $partyQry = MasterCustomerSupplier::query();
         $partyQry->orderBy('id','DESC');
@@ -184,13 +189,13 @@ class CustomerLedgerBook extends Controller
         
         if (!empty($request->name)) {
             $partyQry->where(['companyId'=>$companyId, 'status'=>'Active'])
-            ->where('name', 'like', '%'.$request->name.'%');
+            ->where('id', $request->name);
         }       
         
 
         $partyQry->where(['companyId'=>$companyId, 'status'=>'Active']);
 
-        $parties = $partyQry->paginate(10)->appends(request()->query());
+        $parties = $partyQry->paginate(1000)->appends(request()->query());
         
         return view('balance-report', ['parties'=>$parties, 'master_units'=>$master_units]);
     }
@@ -265,7 +270,7 @@ class CustomerLedgerBook extends Controller
     {
         date_default_timezone_set('Asia/Kolkata');
 
-        $newDate = date('Y-m-d',(strtotime ( '-1 day' , strtotime ($date) ) ));
+        $newDate = date('Y-m-d', strtotime($date));
         
         $customer_sales = DB::select("SELECT SUM(amount) AS amount FROM `customer_sales` WHERE partyId = $partyId AND date <= '$newDate'");
         $customerSaleAmt = $customer_sales[0]->amount;

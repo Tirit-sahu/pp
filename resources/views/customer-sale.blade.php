@@ -578,7 +578,7 @@ $(document).ready(function(){
     function getOldBal(id){
         $.ajax({
             type:'GET',
-            url:'{{ url('nonStaticGetPartyBalance') }}?partyId='+id,
+            url:'{{ url("nonStaticGetPartyBalance") }}?partyId='+id,
             success:function(res){
                 // console.log(res);
                 $("#oldBalance").html("Old Balance: "+res);

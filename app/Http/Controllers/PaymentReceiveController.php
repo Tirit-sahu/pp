@@ -116,6 +116,10 @@ class PaymentReceiveController extends Controller
             $totalAmount += $row->amount;
             $totalDiscount += $row->discount;
             $totalPay = $totalAmount-$totalDiscount;
+
+            $printA6Hi = route("PdfPaymentA6Hindi")."?date=".$row->date."&customerId=".$row->partyId;
+            $printA6En = route("PdfPaymentA6")."?date=".$row->date."&customerId=".$row->partyId;
+
             $html .='
                     <tr>
                         <td>'.$i.'</td>
@@ -125,10 +129,17 @@ class PaymentReceiveController extends Controller
                         <td>'.$row->discount.'</td>
                         <td>'.$row->narration.'</td>                        
                         <td>
-                        <span style="cursor:pointer;" onclick="paymentEdit('.$row->id.')" class="label label-success"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</span>
+                        <a href="'.$printA6En.'" target="_blank" class="btn btn-primary" rel="tooltip" title="Delete">
+                        <b>A6</b>
+                        </a>
 
-                        <span style="cursor:pointer;" onclick="deleteRecord('.$row->id.')" class="label label-danger"><i class="fa fa-minus-circle" aria-hidden="true"></i> Delete</span>
+                        <a href="'.$printA6Hi.'" target="_blank" class="btn btn-warning" rel="tooltip" title="Delete">
+                        <b>A6</b>
+                        </a>
 
+                        <span style="cursor:pointer;" onclick="paymentEdit('.$row->id.')" class="btn btn-success"><b>E</b></span>
+
+                        <span style="cursor:pointer;" onclick="deleteRecord('.$row->id.')" class="btn btn-danger"><b>X</b></span>
                         </td>
                     </tr>
             ';

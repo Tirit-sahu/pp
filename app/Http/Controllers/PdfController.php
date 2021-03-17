@@ -68,13 +68,13 @@ class PdfController extends Controller
         $id = DB::table('customer_sales')->where(['date'=>$request->date, 'partyId'=>$_GET['partyId']])->value('id');
         $Y = date('y', strtotime($request->date));
         $day = date('D', strtotime($request->date));
-        $invoiceNumber = $this->invoice_num(++$id, 5, "CS".$Y."/");
+        $invoiceNumber = $this->invoice_num(++$id, 6, "CS".$Y."/");
     
         $name = $cc->getValueStatic('master_customer_suppliers','name','id',$_GET['partyId']);
         $openingBalance = $cc->getValueStatic('master_customer_suppliers','openingBalance','id',$_GET['partyId']);
     
         $oldBalance = $clb->OpeningBalance($_GET['partyId'], $openingBalance);
-        $CurCarretBal = $cscl->getPartyCarretBalanceByDateStatic($request->partyId, $date);
+        $CurCarretBal = $cscl->getPartyCarretBalanceWithZeroByDateStatic($request->partyId, $date);
     
         $customer_sale_row = '';
         $remark_row = '';
@@ -169,13 +169,13 @@ class PdfController extends Controller
         $id = DB::table('customer_sales')->where(['date'=>$request->date, 'partyId'=>$_GET['partyId']])->value('id');
         $Y = date('y', strtotime($request->date));
         $day = date('D', strtotime($request->date));
-        $invoiceNumber = $this->invoice_num(++$id, 5, "CS".$Y."/");
+        $invoiceNumber = $this->invoice_num(++$id, 6, "CS".$Y."/");
 
         $name = $cc->getValueStatic('master_customer_suppliers','name','id',$_GET['partyId']);
         $openingBalance = $cc->getValueStatic('master_customer_suppliers','openingBalance','id',$_GET['partyId']);
     
         $oldBalance = $clb->OpeningBalance($_GET['partyId'], $openingBalance);
-        $CurCarretBal = $cscl->getPartyCarretBalanceByDateStatic($request->partyId, $date);
+        $CurCarretBal = $cscl->getPartyCarretBalanceWithZeroByDateStatic($request->partyId, $date);
     
         $customer_sale_row = '';
         $remark_row = '';
@@ -270,13 +270,13 @@ class PdfController extends Controller
         $id = DB::table('customer_sales')->where(['date'=>$request->date, 'partyId'=>$_GET['partyId']])->value('id');
         $Y = date('y', strtotime($request->date));
         $day = date('D', strtotime($request->date));
-        $invoiceNumber = $this->invoice_num(++$id, 5, "CS".$Y."/");
+        $invoiceNumber = $this->invoice_num(++$id, 6, "CS".$Y."/");
     
         $name = $cc->getValueStatic('master_customer_suppliers','name','id',$_GET['partyId']);
         $openingBalance = $cc->getValueStatic('master_customer_suppliers','openingBalance','id',$_GET['partyId']);
     
         $oldBalance = $clb->OpeningBalance($_GET['partyId'], $openingBalance);
-        $CurCarretBal = $cscl->getPartyCarretBalanceByDateStatic($request->partyId, $date);
+        $CurCarretBal = $cscl->getPartyCarretBalanceWithZeroByDateStatic($request->partyId, $date);
     
         $customer_sale_row = '';
         $remark_row = '';
@@ -373,13 +373,13 @@ class PdfController extends Controller
         $id = DB::table('customer_sales')->where(['date'=>$request->date, 'partyId'=>$_GET['partyId']])->value('id');
         $Y = date('y', strtotime($request->date));
         $day = $cc->EnDayToHiDay(date('D', strtotime($request->date)));
-        $invoiceNumber = $this->invoice_num(++$id, 5, "CS".$Y."/");
+        $invoiceNumber = $this->invoice_num(++$id, 6, "CS".$Y."/");
 
     $nameHindi = $cc->getValueStatic('master_customer_suppliers','nameHindi','id',$_GET['partyId']);
     $openingBalance = $cc->getValueStatic('master_customer_suppliers','openingBalance','id',$_GET['partyId']);
 
     $oldBalance = $clb->OpeningBalance($_GET['partyId'], $openingBalance);
-    $CurCarretBal = $cscl->getPartyCarretBalanceByDateStatic($request->partyId, $date);
+    $CurCarretBal = $cscl->getPartyCarretBalanceWithZeroByDateStatic($request->partyId, $date);
 
     $customer_sale_row = '';
     $remark_row = '';
@@ -399,12 +399,12 @@ class PdfController extends Controller
         $extraAmt += $row->qty * $unitRate;
 
         $totalAmt += $extraAmt+$row->amount; 
-        $item_name = $cc->getValueStatic('master_items','name','id',$row->itemId);
-        $unit_name = $cc->getValueStatic('master_units','name','id',$row->unitId);
+        $item_name = $cc->getValueStatic('master_items','nameHindi','id',$row->itemId);
+        $unit_name = $cc->getValueStatic('master_units','nameHindi','id',$row->unitId);
         $customer_sale_row .= '
         <tr style="text-align:center;">
         <td>'.$i.'</td>
-        <td>
+        <td style="font-family:ind_hi_1_001;">
            '.$item_name.' &nbsp;
            '.$row->qty.'
            '.$unit_name.'
@@ -478,13 +478,13 @@ class PdfController extends Controller
         $id = DB::table('customer_sales')->where(['date'=>$request->date, 'partyId'=>$_GET['partyId']])->value('id');
         $Y = date('y', strtotime($request->date));
         $day = $cc->EnDayToHiDay(date('D', strtotime($request->date)));
-        $invoiceNumber = $this->invoice_num(++$id, 5, "CS".$Y."/");
+        $invoiceNumber = $this->invoice_num(++$id, 6, "CS".$Y."/");
 
     $nameHindi = $cc->getValueStatic('master_customer_suppliers','nameHindi','id',$_GET['partyId']);
     $openingBalance = $cc->getValueStatic('master_customer_suppliers','openingBalance','id',$_GET['partyId']);
 
     $oldBalance = $clb->OpeningBalance($_GET['partyId'], $openingBalance);
-    $CurCarretBal = $cscl->getPartyCarretBalanceByDateStatic($request->partyId, $date);
+    $CurCarretBal = $cscl->getPartyCarretBalanceWithZeroByDateStatic($request->partyId, $date);
 
     $customer_sale_row = '';
     $remark_row = '';
@@ -504,12 +504,12 @@ class PdfController extends Controller
         $extraAmt += $row->qty * $unitRate;
 
         $totalAmt += $extraAmt+$row->amount; 
-        $item_name = $cc->getValueStatic('master_items','name','id',$row->itemId);
+        $item_name = $cc->getValueStatic('master_items','nameHindi','id',$row->itemId);
         $unit_name = $cc->getValueStatic('master_units','name','id',$row->unitId);
         $customer_sale_row .= '
         <tr style="text-align:center;">
         <td>'.$i.'</td>
-        <td>
+        <td style="font-family:ind_hi_1_001;">
            '.$item_name.' &nbsp;
            '.$row->qty.'
            '.$unit_name.'
@@ -581,13 +581,12 @@ class PdfController extends Controller
     $id = DB::table('customer_sales')->where(['date'=>$request->date, 'partyId'=>$_GET['partyId']])->value('id');
     $Y = date('y', strtotime($request->date));
     $day = $cc->EnDayToHiDay(date('D', strtotime($request->date)));
-    $invoiceNumber = $this->invoice_num(++$id, 5, "CS".$Y."/");
+    $invoiceNumber = $this->invoice_num(++$id, 6, "CS".$Y."/");
 
     $nameHindi = $cc->getValueStatic('master_customer_suppliers','nameHindi','id',$_GET['partyId']);
     $openingBalance = $cc->getValueStatic('master_customer_suppliers','openingBalance','id',$_GET['partyId']);
-
     $oldBalance = $clb->OpeningBalance($_GET['partyId'], $openingBalance);
-    $CurCarretBal = $cscl->getPartyCarretBalanceByDateStatic($request->partyId, $date);
+    $CurCarretBal = $cscl->getPartyCarretBalanceWithZeroByDateStatic($request->partyId, $date);
 
     $customer_sale_row = '';
     $remark_row = '';
@@ -607,12 +606,12 @@ class PdfController extends Controller
         $extraAmt += $row->qty * $unitRate;
 
         $totalAmt += $extraAmt+$row->amount; 
-        $item_name = $cc->getValueStatic('master_items','name','id',$row->itemId);
+        $item_name = $cc->getValueStatic('master_items','nameHindi','id',$row->itemId);
         $unit_name = $cc->getValueStatic('master_units','name','id',$row->unitId);
         $customer_sale_row .= '
         <tr style="text-align:center;">
         <td>'.$i.'</td>
-        <td>
+        <td style="font-family:ind_hi_1_001;">
            '.$item_name.' &nbsp;
            '.$row->qty.'
            '.$unit_name.'
@@ -706,13 +705,12 @@ class PdfController extends Controller
 
     public function item_wise_sale_details_FARMER()
     {
-
     $pdf=PDF::loadView('item_wise_sale_details_FARMER')->setPaper('A4');
     return $pdf->stream();
     }
+
     public function customer_details_ledger()
     {
-
     $pdf=PDF::loadView('customer_details_ledger')->setPaper('A4');
     return $pdf->stream();
     }
@@ -722,8 +720,7 @@ class PdfController extends Controller
     $parties = $this->PDFpartyBalanceReport($request->partyId);
     view()->share(['parties'=>$parties]);
     $pdf=PDF::loadView('PDFPartyBalanceReportA4', ['parties'=>$parties])->setPaper('A4');
-    return $pdf->stream();
-    
+    return $pdf->stream();    
     }
 
 
@@ -738,10 +735,8 @@ class PdfController extends Controller
 
     public function PDFpartyBalanceReport($partyId=0)
     {
-        $companyId = $this->companyId;
-        
+        $companyId = $this->companyId;        
         $condition = "companyId = ".$companyId;
-
         if ($partyId==0) {
             $condition .= " AND status = 'Active'";
             $status = true;
@@ -752,62 +747,280 @@ class PdfController extends Controller
         $master_units = DB::table('master_units')
         ->where('isStockable', 'Yes')
         ->get();
-
-        $parties = DB::select("SELECT * FROM `master_customer_suppliers` WHERE $condition ORDER BY `id` DESC");
-        
+        $parties = DB::select("SELECT * FROM `master_customer_suppliers` WHERE $condition ORDER BY `id` DESC");        
         return ['parties'=>$parties, 'master_units'=>$master_units];
     }
 
 
     //PDF Report By Tarachand Patel
 
-    public function PdfPaymentA6Hindi(Request $request)
+    public function PdfPaymentA6Hindi(Request $request, CustomerSupplierCarretLedger $cscl, CustomerLedgerBook $clb, commonController $cc)
     {
-    $data=  DB::table('customer_sales_payment_receives')->where('date',$request->date)->where('partyId',$request->customerId)->first();
-    $comp=DB::table('master_company_settings')->find($data->companyId);
-    return view('PDFPaymentReceiveHindiA6',compact('data','comp')); 
-    // $pdf=PDF::loadView('PDFPaymentReceiveHindiA6',compact('data','comp'))->setPaper('A6');
-    // return $pdf->stream();
+        date_default_timezone_set('Asia/Kolkata');
+        $date = date('Y-m-d');
+        $companyId = $this->companyId;
+        $master_company_settings=DB::table('master_company_settings')->find($companyId);
+        $CSPR =  DB::table('customer_sales_payment_receives')->where('date',$request->date)->where('partyId',$request->customerId)->first();    
+        $nameHindi = $cc->getValueStatic('master_customer_suppliers','nameHindi','id',$CSPR->partyId);
+        $openingBalance = $cc->getValueStatic('master_customer_suppliers','openingBalance','id',$CSPR->partyId);
+        $oldBalance = $clb->OpeningBalance2($CSPR->partyId, $openingBalance, $request->date);
+        
+        
+        $id = $CSPR->id;
+        $Y = date('y', strtotime($request->date));
+        $day = $cc->EnDayToHiDay(date('D', strtotime($request->date)));
+        $invoiceNumber = $this->invoice_num(++$id, 6, "CR".$Y."/");
+    
+            $content ='
+            <html>
+            <head>
+            <meta charset="utf-8">
+            </head>';
+    
+            $content.="
+            <body>
+            <div style='width:100%;height:10%;background-color:white;border:
+            #000000 1px solid' >
+            <table width='100%'>
+    
+            <tr>
+            <td colspan='2' style='text-align:center;font-family:ind_hi_1_001;'><h2>".$master_company_settings->nameHindi."</h2></td>
+            </tr>
+            
+            <tr>
+            <td  colspan='2' style='text-align:center;font-family:ind_hi_1_001;'><h4>".$master_company_settings->addressHindi."</h4></td>
+            </tr>
+    
+            <tr>
+            <td  colspan='2' style='text-align:center;font-family:ind_hi_1_001;'><h4>मो. : ".$master_company_settings->mobile.",".$master_company_settings->mobile2."</h4></td>
+            </tr>
+    
+            <tr>
+            <td  style='text-align:center;font-family:ind_hi_1_001;'><h6> जमा पावती  </h6></td>
+            <td  style='text-align:center;font-family:ind_hi_1_001;'><h6> ".$invoiceNumber." </h6></td>
+            </tr>
+            </table>
+            </div>
+    
+            <div style='width:100%;height:75%;background-color:white;border:
+            #000000 1px solid' >
+            <table width='100%'>";
+    
+            // $content .="
+            // <tr>
+            // <td width='50%' style='text-align:left;font-family:ind_hi_1_001;'><h4> Receipt No.  : </h4></td>
+            // <td width='50%'> <h4> Receipt1936918</h4></td>
+            // </tr>
+            // "; 
+    
+    
+            $content .="
+            <tr>
+            <td width='50%' style='text-align:left;font-family:ind_hi_1_001;'><h4> तारख : </h4></td>
+            <td width='50%'><h4 style='font-family:ind_hi_1_001;'>".date('d-m-Y', strtotime($request->date))." (".$day.")</h4></td>    
+            </tr>
+    
+            <tr>
+            <td width='50%' style='text-align:left;font-family:ind_hi_1_001;'><h4>ाहक का नाम : </h4></td>
+            <td width='50%' style='text-align:left;font-family:ind_hi_1_001;'><h4>".$nameHindi."</h4></td>
+            </tr>
+    
+           
+            <tr>
+            <td width='50%' style='text-align:left;font-family:ind_hi_1_001;'><h4> पुराना बकाया राश : </h4></td>
+            <td width='50%'><h4>".($oldBalance+$CSPR->amount)."</h4></td>
+    
+            </tr>
+    
+            <tr>
+            <td width='50%' style='text-align:left;font-family:ind_hi_1_001;'><h4> जमा राश :</h4></td>
+            <td width='50%'><h4>".$CSPR->amount."</h4></td>
+    
+            </tr>
+            <tr>
+            <td width='50%' style='text-align:left;font-family:ind_hi_1_001;'><h4>डकाउंट राश : </h4></td>
+            <td width='50%'><h4>".$CSPR->discount."</h4></td></tr>";
+    
+            $content .="       
+    
+            <tr>
+            <td width='50%' style='text-align:left;font-family:ind_hi_1_001;'><h4> वतमान बकाया राश : </h4></td>
+            <td width='50%'><h4>".($oldBalance)."</h4></td>
+    
+            </tr>
+    
+            <tr>
+            <td colspan=2 style='text-align:right;'>        
+            <br>
+            <br>
+            <br>
+            For ".$master_company_settings->name." &nbsp; &nbsp;
+            </td>
+            </tr>
+    
+            </table>
+            </div>
+    
+            </body>	
+            <html>
+    
+    
+            ";
+    
+            $content = urlencode(base64_encode($content));
+            $size='A6';            
+            return Redirect::away('http://rashmihomecare.com/mpdf/mPDF.php?content='.$content.'&size='.$size);
     }
 
     
-    public function PdfPaymentA6(Request $request)
-    {  
-    $data=  DB::table('customer_sales_payment_receives')->where('date',$request->date)->where('partyId',$request->customerId)->first();
-    $comp=DB::table('master_company_settings')->find($data->companyId);
-    $pdf=PDF::loadView('PDFPaymentReceiveA6',compact('data','comp'))->setPaper('A6');
-    return $pdf->stream();
+    public function PdfPaymentA6(Request $request, CustomerSupplierCarretLedger $cscl, CustomerLedgerBook $clb, commonController $cc)
+    {      
+    date_default_timezone_set('Asia/Kolkata');
+    $date = date('Y-m-d');
+    $companyId = $this->companyId;
+    $master_company_settings=DB::table('master_company_settings')->find($companyId);
+    $CSPR =  DB::table('customer_sales_payment_receives')->where('date',$request->date)->where('partyId',$request->customerId)->first();    
+    $name = $cc->getValueStatic('master_customer_suppliers','name','id',$CSPR->partyId);
+    $openingBalance = $cc->getValueStatic('master_customer_suppliers','openingBalance','id',$CSPR->partyId);
+    $oldBalance = $clb->OpeningBalance2($CSPR->partyId, $openingBalance, $request->date);
+    
+    
+    $id = $CSPR->id;
+    $Y = date('y', strtotime($request->date));
+    $day = date('D', strtotime($request->date));
+    $invoiceNumber = $this->invoice_num(++$id, 6, "CR".$Y."/");
+
+        $content ='
+        <html>
+        <head>
+        <meta charset="utf-8">
+        </head>';
+
+        $content.="
+        <body>
+        <div style='width:100%;height:10%;background-color:white;border:
+        #000000 1px solid' >
+        <table width='100%'>
+
+        <tr>
+        <td colspan='2' style='text-align:center;font-family:ind_hi_1_001;'><h2>".$master_company_settings->name."</h2></td>
+        </tr>
+        
+        <tr>
+        <td  colspan='2' style='text-align:center;font-family:ind_hi_1_001;'><h4>".$master_company_settings->address."</h4></td>
+        </tr>
+
+        <tr>
+        <td  colspan='2' style='text-align:center;font-family:ind_hi_1_001;'><h4>Mo. : ".$master_company_settings->mobile.",".$master_company_settings->mobile2."</h4></td>
+        </tr>
+
+        <tr>
+        <td  style='text-align:center;font-family:ind_hi_1_001;'><h6> Deposite Receipt  </h6></td>
+        <td  style='text-align:center;font-family:ind_hi_1_001;'><h6> ".$invoiceNumber." </h6></td>
+        </tr>
+        </table>
+        </div>
+
+        <div style='width:100%;height:75%;background-color:white;border:
+        #000000 1px solid' >
+        <table width='100%'>";
+
+        // $content .="
+        // <tr>
+        // <td width='50%' style='text-align:left;font-family:ind_hi_1_001;'><h4> Receipt No.  : </h4></td>
+        // <td width='50%'> <h4> Receipt1936918</h4></td>
+        // </tr>
+        // "; 
+
+
+        $content .="
+        <tr >
+        <td width='50%' style='text-align:left;font-family:ind_hi_1_001;'><h4> Date : </h4></td>
+        <td width='50%'><h4>".date('d-m-Y', strtotime($request->date))." (".$day.")</h4></td>
+
+        </tr>
+
+        <tr >
+        <td width='50%' style='text-align:left;font-family:ind_hi_1_001;'><h4>Customer Name : </h4></td>
+        <td width='50%' style='text-align:left;font-family:ind_hi_1_001;'><h4>".$name."</h4></td>
+        </tr>
+
+       
+        <tr>
+        <td width='50%' style='text-align:left;font-family:ind_hi_1_001;'><h4> Old Bal. Amount  : </h4></td>
+        <td width='50%'><h4>".($oldBalance+$CSPR->amount)."</h4></td>
+
+        </tr>
+
+        <tr>
+        <td width='50%' style='text-align:left;font-family:ind_hi_1_001;'><h4> Deposite Amount :</h4></td>
+        <td width='50%'><h4>".$CSPR->amount."</h4></td>
+
+        </tr>
+        <tr>
+        <td width='50%' style='text-align:left;font-family:ind_hi_1_001;'><h4> Discount Amount : </h4></td>
+        <td width='50%'><h4>".$CSPR->discount."</h4></td></tr>";
+
+        $content .="       
+
+        <tr>
+        <td width='50%' style='text-align:left;font-family:ind_hi_1_001;'><h4> Net Bal. Amount  : </h4></td>
+        <td width='50%'><h4>".($oldBalance)."</h4></td>
+
+        </tr>
+
+        <tr>
+        <td colspan=2 style='text-align:right;'>        
+        <br>
+        <br>
+        <br>
+        For ".$master_company_settings->name." &nbsp; &nbsp;
+        </td>
+        </tr>
+
+        </table>
+        </div>
+
+        </body>	
+        <html>
+
+
+        ";
+
+        $content = urlencode(base64_encode($content));
+        $size='A6';            
+        return Redirect::away('http://rashmihomecare.com/mpdf/mPDF.php?content='.$content.'&size='.$size);
+
     }
 
     //CARET RECEIVE EN A6
     public function PdfCarretReceiveA6(Request $request, CustomerSupplierCarretLedger $cscl, commonController $cc)
     {    
-    $customer_carret_receives = DB::table('customer_carret_receives')->where('id',$request->id)->first();
-    $comp = DB::table('master_company_settings')->where('id',$customer_carret_receives->companyId)->first();
     
-
+        $customer_carret_receives = DB::table('customer_carret_receives')->where('id',$request->id)->first();
+        $comp = DB::table('master_company_settings')->where('id',$customer_carret_receives->companyId)->first();
+    
         date_default_timezone_set('Asia/Kolkata');
         $date = date('Y-m-d');
-        $newdate = date("Y-m-d", strtotime("-1 day"));
-        $OldCarretBal= $cscl->getPartyCarretBalanceByDateStatic($customer_carret_receives->partyId, $newdate);
-        $CurCarretBal= $cscl->getPartyCarretBalanceByDateStatic($customer_carret_receives->partyId, $date);
+        $newdate = date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $request->date) ) ));
+        $OldCarretBal = $cscl->getPartyCarretBalanceWithZeroByDateStatic($customer_carret_receives->partyId, $newdate);
+        $CurCarretBal = $cscl->getPartyCarretBalanceWithZeroByDateStatic($customer_carret_receives->partyId, $date);
         $day = date('D', strtotime($customer_carret_receives->date));
         $dayInHi = $cc->staticEnDayToHiDay($day);
+        $customer_carret_receives->unitId;
+        $unitName = $cc->getValueStatic('master_units','name','id',$customer_carret_receives->unitId);
 
         $partyName = $cc->getValueStatic('master_customer_suppliers','name','id',$customer_carret_receives->partyId);
         
         $remark = '';
         if($customer_carret_receives->narration!=''){
-            $remark = '<tr>
-            <td colspan="3"> <b>Remark </b></td>
-            <td colspan="3"> '.$customer_carret_receives->narration.' </td>
-            </tr>';
+            $remark = '<tr><td colspan="3"> <b>Remark </b></td><td colspan="3"> '.$customer_carret_receives->narration.' </td></tr>';
         }
                 
 
         //VIEW PART
         $content = urlencode('
-        <!DOCTYPE html> <html lang="en"> <head> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Document</title> <style> tr, th, td{ font-family:ind_hi_1_001; } </style> </head> <body> <table cellspacing="5px" rowspacing="5px" > <tr> <th style="text-align:center;" colspan="6"> '.$comp->name.' </th> </tr> <tr> <td style="text-align:center;" colspan="6" ><b>'.$comp->address.'<br> Mo. :</b>'.$comp->mobile.', '.$comp->mobile2.'<br> <b>Caret Receipt</td> </tr> <tr class="row2"> <td colspan="3"> <b> Date : </b></td> <td colspan="3"> '. date("d-m-Y", strtotime($customer_carret_receives->date)).' ( '.$day.' )</td> </tr> <tr> <td colspan="3"> <b>Customer Name :</b></td> <td colspan="3"> '.$partyName.' </td> </tr> <tr> <td colspan="3"> <b>Old Bal. Carret : </b></td> <td colspan="3">'.$OldCarretBal.'</td> </tr> <tr class="row3"> <td colspan="3"> <b>Deposite Carret : </b></td> <td colspan="3">'.$customer_carret_receives->qty.'</td> </tr> '.$remark.' <tr class="row4"> <td colspan="6" style="font-size: 14px;"> <b>Balance Carret : </b> '.$CurCarretBal.'</td> </tr> <tr> <td colspan="6" style="text-align:right;">For '.$comp->name.' </td> </tr> </table> </body> </html>
+        <!DOCTYPE html> <html lang="en"> <head> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Document</title> <style> tr, th, td{ font-family:ind_hi_1_001; } </style> </head> <body> <table cellspacing="5px" rowspacing="5px" > <tr> <th style="text-align:center;" colspan="6"> '.$comp->name.' </th> </tr> <tr> <td style="text-align:center;" colspan="6" ><b>'.$comp->address.'<br> Mo. :</b>'.$comp->mobile.', '.$comp->mobile2.'<br> <b>Caret Receipt</td> </tr> <tr class="row2"> <td colspan="3"> <b> Date : </b></td> <td colspan="3"> '. date("d-m-Y", strtotime($customer_carret_receives->date)).' ( '.$day.' )</td> </tr> <tr> <td colspan="3"> <b>Customer Name :</b></td> <td colspan="3"> '.$partyName.' </td> </tr> <tr> <td colspan="3"> <b>Old Bal. Carret : </b></td> <td colspan="3">'.$OldCarretBal.'</td> </tr> <tr class="row3"> <td colspan="3"> <b>Deposite Carret : </b></td> <td colspan="3">'.$unitName.' : '.$customer_carret_receives->qty.'</td> </tr> '.$remark.' <tr class="row4"> <td colspan="6" style="font-size: 14px;"> <b>Balance Carret : </b> '.$CurCarretBal.'</td> </tr> <tr> <td colspan="6" style="text-align:right;">For '.$comp->name.' </td> </tr> </table> </body> </html>
         ');
 
         $size = 'A6';
@@ -827,14 +1040,17 @@ class PdfController extends Controller
         // ===== GET DATA FOR VIEW =====
         date_default_timezone_set('Asia/Kolkata');
         $date = date('Y-m-d');
-        $newdate = date("Y-m-d", strtotime("-1 day"));
-        $OldCarretBal = $cscl->getPartyCarretBalanceByDateStatic($customer_carret_receives->partyId, $newdate);
-        $CurCarretBal = $cscl->getPartyCarretBalanceByDateStatic($customer_carret_receives->partyId, $date);
+        $dateSub1Day = date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $request->date) ) ));
+        $OldCarretBal = $cscl->getPartyCarretBalanceWithZeroByDateStatic($customer_carret_receives->partyId, $dateSub1Day);
+        $CurCarretBal = $cscl->getPartyCarretBalanceWithZeroByDateStatic($customer_carret_receives->partyId, $request->date);
 
         $day = date('D', strtotime($customer_carret_receives->date));
         $dayInHi = $cc->staticEnDayToHiDay($day);
-
+        $unitName = $cc->getValueStatic('master_units','name','id',$customer_carret_receives->unitId);
         $partyHiName = $cc->getValueStatic('master_customer_suppliers','nameHindi','id',$customer_carret_receives->partyId);
+        if ($partyHiName == '') {
+            $partyHiName = $cc->getValueStatic('master_customer_suppliers','name','id',$customer_carret_receives->partyId);
+        }
 
             $remark = '';
             if($customer_carret_receives->narration!=''){
@@ -845,61 +1061,7 @@ class PdfController extends Controller
             }            
             
             //VIEW PART
-            $content = urlencode('
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
-            <style>
-            tr, th, td{
-            font-family:ind_hi_1_001;
-            }
-            </style>
-            </head>
-            <body>
-            <center>
-            <table cellspacing="5px" rowspacing="5px">
-            <tr>
-            <th style="text-align:center;" colspan="6"><br><br>
-            '. $comp->nameHindi .'
-            </th>          
-            </tr>
-            <tr>
-            <td  style="text-align:center;" colspan="6" ><b> '.$comp->addressHindi.'<br><br>
-            मो. :</b> '. $comp->mobile.'", "'.$comp->mobile2 .'"<br><br>
-            <b>कैरट पावती</td>
-            </tr>
-            <tr class="row2">
-            <td colspan="3"> <b> तारीख : </b></td>
-            <td colspan="3">'.date("d-m-Y", strtotime($customer_carret_receives->date))."(". $dayInHi .")".'</td>
-            </tr>
-            <tr>
-            <td colspan="3"> <b>ग्राहक का नाम :</b></td>
-            <td colspan="3"> '.$partyHiName.' </td>
-            </tr>
-            <tr>
-            <td colspan="3"> <b>पिछला बकाया कैरट : </b></td>
-            <td colspan="3"> '.$OldCarretBal.'</td>
-            </tr>
-            <tr class="row3">
-            <td colspan="3"> <b>जमा  कैरट : </b></td>
-            <td colspan="3"> '.$customer_carret_receives->qty.'</td>
-            </tr>
-            '.$remark.'
-            <tr class="row4">
-            <td colspan="3" > <b> बकाया कैरट  : </b></td>
-            <td colspan="3">'.$CurCarretBal.'</td>
-            </tr>
-            <tr>
-            <td colspan="6" style="text-align:right;font-size:16px;"><br><br>For '.$comp->name.' </td>
-            </tr>
-            </table>
-            </center>
-            </body>
-            </html>
-            ');
+            $content = urlencode('<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Document</title> <style> tr, th, td{ font-family:ind_hi_1_001; } </style> </head> <body> <center> <table cellspacing="5px" rowspacing="5px"> <tr> <th style="text-align:center;" colspan="6"><br><br> '. $comp->nameHindi .' </th> </tr> <tr> <td style="text-align:center;" colspan="6" ><b> '.$comp->addressHindi.'<br><br> मो. :</b> '. $comp->mobile.'", "'.$comp->mobile2 .'"<br><br> <b>कैरट पावती</td> </tr> <tr class="row2"> <td colspan="3"> <b> तारीख : </b></td> <td colspan="3">'.date("d-m-Y", strtotime($customer_carret_receives->date))."(". $dayInHi .")".'</td> </tr> <tr> <td colspan="3"> <b>ग्राहक का नाम :</b></td> <td colspan="3"> '.$partyHiName.' </td> </tr> <tr> <td colspan="3"> <b>पिछला बकाया कैरट : </b></td> <td colspan="3"> '.$OldCarretBal.'</td> </tr> <tr class="row3"> <td colspan="3"> <b>जमा कैरट : </b></td> <td colspan="3"> '.$unitName.' : '.$customer_carret_receives->qty.'</td> </tr> '.$remark.' <tr class="row4"> <td colspan="3" > <b> बकाया कैरट : </b></td> <td colspan="3">'.$CurCarretBal.'</td> </tr> <tr> <td colspan="6" style="text-align:right;font-size:16px;"><br><br>For '.$comp->name.' </td> </tr> </table> </center> </body> </html> ');
 
         $size = 'A6';
 
@@ -913,27 +1075,18 @@ class PdfController extends Controller
 
     public function PDFpurchaseEnteryA4(Request $request)
     {   
-
-    $data=  DB::table('purchase_entries')->find($request->id);
- 
+    $data=  DB::table('purchase_entries')->find($request->id); 
     $comp=DB::table('master_company_settings')->find($data->companyId);
-
     $records=DB::table('purchase_entry_details')->where('purchaseEntryId',$data->id)->get();
     $expenses=DB::table('purchase_entry_expenses')->where('purchaseEntryId',$data->id)->get();
-    // dd($expenses);
-    // dd($data);
-    // dd($records);
     $pdf=PDF::loadView('PDFpurchaseEnteryA4',compact('data','comp','records','expenses'))->setPaper('A4');
     return $pdf->stream();
     }
 
     public function PDFpurchaseEnteryA5(Request $request)
-    {    
-
+    {   
     $data=  DB::table('purchase_entries')->find($request->id);
- 
     $comp=DB::table('master_company_settings')->find($data->companyId);
-
     $records=DB::table('purchase_entry_details')->where('purchaseEntryId',$data->id)->get();
     $expenses=DB::table('purchase_entry_expenses')->where('purchaseEntryId',$data->id)->get();
     // dd($expenses);
@@ -1021,14 +1174,12 @@ class PdfController extends Controller
     {
         $customPaper = array(0,0,290,1500);
         $row=  DB::table('purchase_payment_entries')->where('partyId',$request->partyId)->where('date',$request->date)->first();
-        // dd($row);
-     
+        // dd($row);     
       
         $comp=DB::table('master_company_settings')->where('id',$row->companyId)->first();
         // dd($comp);
         $pdf=PDF::loadView('PDFpurchasePaymentA6',compact('row','comp'))->setPaper($customPaper);
         return $pdf->stream();
-
     }
 
 

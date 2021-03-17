@@ -84,6 +84,10 @@ class CustomerCarretReceiveController extends Controller
             $customerName = $cmn->getValue('master_customer_suppliers','name','id',$row->partyId);
             $unitName = $cmn->getValue('master_units','name','id',$row->unitId);
             $totalQTY += $row->qty;
+
+            $A6En = route('PdfCarretReceiveA6').'?id='.$row->id.'&date='.$row->date;
+            $A6Hi = route('PdfCarretReceiveHindiA6').'?id='.$row->id.'&date='.$row->date;
+
             $html .='
                     <tr>
                         <td>'.$i.'</td>
@@ -94,9 +98,18 @@ class CustomerCarretReceiveController extends Controller
                         <td>'.$row->discount.'</td>
                         <td>'.$row->narration.'</td>                        
                         <td>
-                        <span style="cursor:pointer;" onclick="ReceiveCarretEdit('.$row->id.')" class="label label-success"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</span>
 
-                        <span style="cursor:pointer;" onclick="ReceiveCarretDelete('.$row->id.')" class="label label-danger"><i class="fa fa-minus-circle" aria-hidden="true"></i> Delete</span>
+                        <a href="'.$A6En.'" target="_blank" class="btn btn-primary" rel="tooltip" title="Print">
+                        <b>A6</b>
+                        </a>
+
+                        <a href="'.$A6Hi.'" target="_blank"  class="btn btn-warning" rel="tooltip" title="Print">
+                        <b>A6</b>
+                        </a>
+
+                        <span style="cursor:pointer;" onclick="ReceiveCarretEdit('.$row->id.')" class="btn btn-success"><b>E</b></span>
+
+                        <span style="cursor:pointer;" onclick="ReceiveCarretDelete('.$row->id.')" class="btn btn-danger"><b>X</b></span>
 
                         </td>
                     </tr>

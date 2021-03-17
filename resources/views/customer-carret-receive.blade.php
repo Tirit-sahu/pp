@@ -297,14 +297,17 @@ $date = date('d-m-Y');
 
 
     function ReceiveCarretDelete(id){
-        $.ajax({
+        if(confirm('Are you sure?')){
+            $.ajax({
             type:'GET',
             url:'{{ url("common-destroy") }}?table=customer_carret_receives&key=id&value='+id,
             success:function(res){
                 console.log(res);
                 showCustomerCarretReceive();
             }
-        });
+            });
+        }
+        
     }
 
 
